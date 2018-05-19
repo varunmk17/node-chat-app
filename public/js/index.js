@@ -46,17 +46,17 @@ locationButton.on('click', function() {
         return alert('Geolocaction not supported');
     }
 
-    locationButton.attr('disabled', 'disabled');
+    locationButton.attr('disabled', 'disabled').text('Sending location..');
 
     navigator.geolocation.getCurrentPosition(function (position) {
 
-        locationButton.removeAttr('disabled');
+        locationButton.removeAttr('disabled').text('Sending location');
         socket.emit('createLocationMessage', {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
         })
     }, function () {
-        locationButton.removeAttr('disabled');
+        locationButton.removeAttr('disabled').text('Sending location');
         return alert('Unable to fetch location');
     });
 });
